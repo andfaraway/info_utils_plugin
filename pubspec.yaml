@@ -1,6 +1,6 @@
 name: info_utils_plugin
 description: "This is a plugin used to obtain the basic information of the user's device and its current location."
-version: 0.0.1+0
+version: 0.0.2
 homepage: https://github.com/andfaraway/info_utils_plugin
 
 environment:

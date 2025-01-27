@@ -7,7 +7,8 @@ import 'location_model.dart';
 class LocationManager {
   LocationManager._privateConstructor();
 
-  static final LocationManager _instance = LocationManager._privateConstructor();
+  static final LocationManager _instance =
+      LocationManager._privateConstructor();
 
   static LocationManager get instance => _instance;
 
@@ -21,14 +22,16 @@ class LocationManager {
     bool locationPermission = await requestPermission();
     if (locationPermission) {
       try {
-        final position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 8));
+        final position = await Geolocator.getCurrentPosition()
+            .timeout(const Duration(seconds: 8));
 
         _locationData = LocationModel(
           latitude: position.latitude,
           longitude: position.longitude,
         );
 
-        List<Placemark> marks = await placemarkFromCoordinates(position.latitude, position.longitude);
+        List<Placemark> marks = await placemarkFromCoordinates(
+            position.latitude, position.longitude);
 
         _locationData = LocationModel(
           latitude: position.latitude,
@@ -67,7 +70,8 @@ class LocationManager {
     bool locationPermission = await requestPermission();
     if (locationPermission) {
       try {
-        final position = await Geolocator.getLastKnownPosition().timeout(const Duration(seconds: 8));
+        final position = await Geolocator.getLastKnownPosition()
+            .timeout(const Duration(seconds: 8));
         if (position == null) {
           return null;
         }
@@ -76,7 +80,8 @@ class LocationManager {
           longitude: position.longitude,
         );
 
-        List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+        List<Placemark> placemarks = await placemarkFromCoordinates(
+            position.latitude, position.longitude);
         _lastLocData = LocationModel(
           latitude: position.latitude,
           longitude: position.longitude,

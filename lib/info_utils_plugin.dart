@@ -1,6 +1,6 @@
-import 'package:info_utils_plugin/info_util.dart';
-import 'package:info_utils_plugin/location_manager.dart';
-import 'package:info_utils_plugin/location_model.dart';
+import 'package:info_utils_plugin/src/info_util.dart';
+import 'package:info_utils_plugin/src/location_manager.dart';
+import 'package:info_utils_plugin/src/location_model.dart';
 import 'info_utils_plugin_platform_interface.dart';
 
 class InfoUtilsPlugin {

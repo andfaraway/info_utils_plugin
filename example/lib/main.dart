@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:info_utils_plugin/info_utils_plugin.dart';
-import 'package:info_utils_plugin/location_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,13 +31,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  test()async{
-    // print(await plugin.getLocation());
-  }
-
   @override
   Widget build(BuildContext context) {
-    test();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(

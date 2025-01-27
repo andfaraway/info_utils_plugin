@@ -30,5 +30,4 @@ abstract class InfoUtilsPluginPlatform extends PlatformInterface {
   Future<String> getBatteryLevel() {
     throw UnimplementedError('getBatteryLevel() has not been implemented.');
   }
-
 }

@@ -8,16 +8,15 @@ class LocationModel {
   final String? address;
   bool isCurrent;
 
-  LocationModel({
-    this.latitude,
-    this.longitude,
-    this.province,
-    this.city,
-    this.address,
-    this.isCurrent = true
-  });
+  LocationModel(
+      {this.latitude,
+      this.longitude,
+      this.province,
+      this.city,
+      this.address,
+      this.isCurrent = true});
 
-  Map<String,dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "longitude": longitude,
       "latitude": latitude,
