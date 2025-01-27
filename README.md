@@ -12,7 +12,8 @@ iOS requires the following permissions to be added in the `Info.plist` file:
 
 In the `ios/Podfile` file, ensure you have the necessary configurations. Here is an example of what you might need to add or check:
 
-```post_install do |installer|
+```
+post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
      target.build_configurations.each do |config|
