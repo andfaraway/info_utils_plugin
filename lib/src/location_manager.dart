@@ -25,11 +25,6 @@ class LocationManager {
         final position = await Geolocator.getCurrentPosition()
             .timeout(const Duration(seconds: 8));
 
-        _locationData = LocationModel(
-          latitude: position.latitude,
-          longitude: position.longitude,
-        );
-
         List<Placemark> marks = await placemarkFromCoordinates(
             position.latitude, position.longitude);
 
@@ -40,6 +35,7 @@ class LocationManager {
           city: marks.firstOrNull?.subAdministrativeArea,
           address: marks.firstOrNull?.street,
           isCurrent: true,
+          locationTime: position.timestamp.toString(),
         );
       } catch (e) {
         debugPrint('### get location error: ${e.toString()}');
@@ -74,20 +70,17 @@ class LocationManager {
         if (position == null) {
           return null;
         }
-        _lastLocData = LocationModel(
-          latitude: position.latitude,
-          longitude: position.longitude,
-        );
 
-        List<Placemark> placemarks = await placemarkFromCoordinates(
+        List<Placemark> marks = await placemarkFromCoordinates(
             position.latitude, position.longitude);
         _lastLocData = LocationModel(
           latitude: position.latitude,
           longitude: position.longitude,
-          province: placemarks.firstOrNull?.administrativeArea,
-          city: placemarks.firstOrNull?.subAdministrativeArea,
-          address: placemarks.firstOrNull?.street,
+          province: marks.firstOrNull?.administrativeArea,
+          city: marks.firstOrNull?.subAdministrativeArea,
+          address: marks.firstOrNull?.street,
           isCurrent: false,
+          locationTime: position.timestamp.toString(),
         );
       } catch (e) {
         debugPrint('### get getLastKnowPosition error: ${e.toString()}');

@@ -20,14 +20,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    test();
+  }
 
-    plugin.getDeviceInfo().then((value) {
-      data.addAll(value);
-      setState(() {});
-    });
-    plugin.getLocation().then((value) {
-      data.addAll(value);
-      setState(() {});
+  test() async{
+    final s = await plugin.getDeviceInfo();
+    data = s.toJson();
+    setState(() {
+
     });
   }
 
