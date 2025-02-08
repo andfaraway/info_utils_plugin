@@ -9,6 +9,8 @@ import 'package:info_utils_plugin/src/location_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'info_utils_plugin_platform_interface.dart';
 
+export 'package:info_utils_plugin/src/device_info_model.dart';
+
 class InfoUtilsPlugin {
   Future<DeviceInfoModel> getDeviceInfo() async {
     DeviceInfoModel model = DeviceInfoModel();
@@ -23,12 +25,23 @@ class InfoUtilsPlugin {
     model.uuid = await getDeviceId();
     model.network = await getNetwork();
     model.battery = await getBatteryLevel();
-    model.locationModel = await getLocation();
+    model.isPhysical = await isPhysicalDevice();
     model.date = DateTime.now().toString();
+    model.locationModel = await getLocation();
+
     return model;
   }
 
-
+  static Future<bool> isPhysicalDevice() async {
+    DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      return (await deviceInfoPlugin.iosInfo).isPhysicalDevice;
+    } else if (Platform.isAndroid) {
+      return (await deviceInfoPlugin.androidInfo).isPhysicalDevice;
+    } else {
+      return false;
+    }
+  }
 
   /// 获取应用名称
   static Future<String> getAppName() async {
@@ -91,7 +104,7 @@ class InfoUtilsPlugin {
 
     if (Platform.isIOS) {
       IosDeviceInfo iosDeviceInfo = await deviceInfoPlugin.iosInfo;
-      final type = iosDeviceInfo.modelName;
+      final type = iosDeviceInfo.utsname.machine;
       return type;
     }
 
@@ -119,7 +132,6 @@ class InfoUtilsPlugin {
   static Future<String> getBatteryLevel() async {
     return InfoUtilsPluginPlatform.instance.getBatteryLevel();
   }
-
 
   /// get Location
   Future<LocationModel?> getLocation() async {
