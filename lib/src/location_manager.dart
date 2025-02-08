@@ -55,7 +55,6 @@ class LocationManager {
       if (!tempSerEnabled) {
         return false;
       }
-      print(await Permission.location.request());
       return await Permission.location.request().isGranted;
     } catch (e) {
       return false;
